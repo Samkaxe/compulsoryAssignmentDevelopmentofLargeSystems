@@ -1,36 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\charl\\RiderProjects\\compulsoryAssignmentDevelopmentofLargeSystems\\AdditionService\\AdditionService.csproj": {}
+    "C:\\Users\\Bruger\\Documents\\GitHub\\compulsoryAssignmentDevelopmentofLargeSystems\\AdditionService\\AdditionService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\charl\\RiderProjects\\compulsoryAssignmentDevelopmentofLargeSystems\\AdditionService\\AdditionService.csproj": {
+    "C:\\Users\\Bruger\\Documents\\GitHub\\compulsoryAssignmentDevelopmentofLargeSystems\\AdditionService\\AdditionService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\charl\\RiderProjects\\compulsoryAssignmentDevelopmentofLargeSystems\\AdditionService\\AdditionService.csproj",
+        "projectUniqueName": "C:\\Users\\Bruger\\Documents\\GitHub\\compulsoryAssignmentDevelopmentofLargeSystems\\AdditionService\\AdditionService.csproj",
         "projectName": "AdditionService",
-        "projectPath": "C:\\Users\\charl\\RiderProjects\\compulsoryAssignmentDevelopmentofLargeSystems\\AdditionService\\AdditionService.csproj",
-        "packagesPath": "C:\\Users\\charl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\charl\\RiderProjects\\compulsoryAssignmentDevelopmentofLargeSystems\\AdditionService\\obj\\",
+        "projectPath": "C:\\Users\\Bruger\\Documents\\GitHub\\compulsoryAssignmentDevelopmentofLargeSystems\\AdditionService\\AdditionService.csproj",
+        "packagesPath": "C:\\Users\\Bruger\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Bruger\\Documents\\GitHub\\compulsoryAssignmentDevelopmentofLargeSystems\\AdditionService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\charl\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Bruger\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\charl\\RiderProjects\\compulsoryAssignmentDevelopmentofLargeSystems\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\charl\\RiderProjects\\compulsoryAssignmentDevelopmentofLargeSystems\\Infrastructure\\Infrastructure.csproj"
+              "C:\\Users\\Bruger\\Documents\\GitHub\\compulsoryAssignmentDevelopmentofLargeSystems\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Bruger\\Documents\\GitHub\\compulsoryAssignmentDevelopmentofLargeSystems\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -98,29 +95,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.407\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\charl\\RiderProjects\\compulsoryAssignmentDevelopmentofLargeSystems\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\Bruger\\Documents\\GitHub\\compulsoryAssignmentDevelopmentofLargeSystems\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\charl\\RiderProjects\\compulsoryAssignmentDevelopmentofLargeSystems\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Bruger\\Documents\\GitHub\\compulsoryAssignmentDevelopmentofLargeSystems\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\charl\\RiderProjects\\compulsoryAssignmentDevelopmentofLargeSystems\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\charl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\charl\\RiderProjects\\compulsoryAssignmentDevelopmentofLargeSystems\\Infrastructure\\obj\\",
+        "projectPath": "C:\\Users\\Bruger\\Documents\\GitHub\\compulsoryAssignmentDevelopmentofLargeSystems\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Bruger\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Bruger\\Documents\\GitHub\\compulsoryAssignmentDevelopmentofLargeSystems\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\charl\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Bruger\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -166,7 +160,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.407\\RuntimeIdentifierGraph.json"
         }
       }
     }
