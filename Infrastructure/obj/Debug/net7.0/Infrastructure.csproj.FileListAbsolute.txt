@@ -59,3 +59,4 @@ C:\Users\charl\RiderProjects\compulsoryAssignmentDevelopmentofLargeSystems\Infra
 C:\Users\charl\RiderProjects\compulsoryAssignmentDevelopmentofLargeSystems\Infrastructure\obj\Debug\net7.0\Infrastructure.pdb
 C:\Users\charl\RiderProjects\compulsoryAssignmentDevelopmentofLargeSystems\Infrastructure\obj\Debug\net7.0\Infrastructure.genruntimeconfig.cache
 C:\Users\charl\RiderProjects\compulsoryAssignmentDevelopmentofLargeSystems\Infrastructure\obj\Debug\net7.0\ref\Infrastructure.dll
+C:\Users\charl\RiderProjects\compulsoryAssignmentDevelopmentofLargeSystems\Infrastructure\bin\Debug\net7.0\RabbitMQ.Client.dll

@@ -79,3 +79,4 @@ C:\Users\charl\RiderProjects\compulsoryAssignmentDevelopmentofLargeSystems\Addit
 C:\Users\charl\RiderProjects\compulsoryAssignmentDevelopmentofLargeSystems\AdditionService\bin\Debug\net7.0\Microsoft.Bcl.TimeProvider.dll
 C:\Users\charl\RiderProjects\compulsoryAssignmentDevelopmentofLargeSystems\AdditionService\bin\Debug\net7.0\Polly.dll
 C:\Users\charl\RiderProjects\compulsoryAssignmentDevelopmentofLargeSystems\AdditionService\bin\Debug\net7.0\Polly.Core.dll
+C:\Users\charl\RiderProjects\compulsoryAssignmentDevelopmentofLargeSystems\AdditionService\bin\Debug\net7.0\RabbitMQ.Client.dll

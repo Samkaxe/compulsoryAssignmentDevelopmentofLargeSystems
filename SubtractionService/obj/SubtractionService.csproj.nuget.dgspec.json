@@ -50,6 +50,10 @@
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[7.0.17, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.8.1, )"
             }
           },
           "imports": [
@@ -124,6 +128,14 @@
             "OpenTelemetry.Instrumentation.AspNetCore": {
               "target": "Package",
               "version": "[1.7.1, )"
+            },
+            "Polly": {
+              "target": "Package",
+              "version": "[8.3.1, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.8.1, )"
             },
             "Serilog": {
               "target": "Package",
