@@ -1,4 +1,6 @@
-﻿using HistoryService.Application.Interfaces;
+﻿using EasyNetQ;
+using HistoryService.API.Subscribers;
+using HistoryService.Application.Interfaces;
 using HistoryService.Infrastructure;
 using HistoryService.Infrastructure.Interfaces;
 using HistoryService.Infrastructure.Services;
@@ -12,5 +14,10 @@ public static class ConfigurationService
         services.AddScoped<IHistoryRepository, HistoryRepository>();
         services.AddScoped<IHistoryService, Application.Services.HistoryService>();
         services.AddDbContext<HistoryContext>();
+        
+        var connectionString = Environment.GetEnvironmentVariable("EASYNETQ_CONNECTION_STRING");
+        services.AddSingleton<IBus>(RabbitHutch.CreateBus(connectionString));
+
+        services.AddHostedService<HistoryConsumer>();
     }
 }
