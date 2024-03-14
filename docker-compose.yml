@@ -33,6 +33,8 @@ services:
     image: openzipkin/zipkin
     ports:
       - "9411:9411"
+    networks:
+      - myapp-network
     
   history-service:
     build:

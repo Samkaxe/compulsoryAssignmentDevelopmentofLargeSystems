@@ -9,6 +9,7 @@ namespace HistoryService.API.Controllers;
 public class HistoryController : ControllerBase
 {
     private readonly IHistoryService _historyService;
+    
 
     public HistoryController(IHistoryService historyService)
     {
