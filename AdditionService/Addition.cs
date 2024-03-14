@@ -5,6 +5,10 @@ using Polly.CircuitBreaker;
 using Infrastructure;
 using Polly.Retry;
 using Serilog;
+// for rabbit mq 
+using RabbitMQ.Client;
+using System.Text;
+using System.Text.Json;
 
 namespace AdditionService
 {
@@ -32,9 +36,30 @@ namespace AdditionService
                 {
                     Log.Information("Circuit reset.");
                 });
+        
+        private void PublishOperationMessage(int number1, int number2, int result)
+        {
+            var factory = new ConnectionFactory() { HostName = "localhost" };
+            using (var connection = factory.CreateConnection())
+            using (var channel = connection.CreateModel())
+            {
+                channel.ExchangeDeclare(exchange: "operations_exchange", type: "topic");
+
+                var routingKey = "addition.operation.logged";
+                var message = new { Number1 = number1, Number2 = number2, Result = result };
+                var messageBody = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(message));
+
+                channel.BasicPublish(exchange: "operations_exchange",
+                    routingKey: routingKey,
+                    basicProperties: null,
+                    body: messageBody);
+                Console.WriteLine(" [x] Sent '{0}':'{1}'", routingKey, message);
+            }
+        }
 
         public int Add(int number1, int number2)
         {
+            
             using (var activity = ActivitySource.StartActivity("Add"))
             {
                 if (activity == null)
@@ -53,7 +78,12 @@ namespace AdditionService
 
                 policyWrap.Execute(() => 
                 {
-                    OperationService.LogOperation("Addition", number1, number2, result);
+                    // 
+                    // the new way of sending data via rabbitmq 
+                      PublishOperationMessage(number1, number2, result);
+                    
+                  // this for database call direct to test poly
+                  //   OperationService.LogOperation("Addition", number1, number2, result);
                 });
 
                 Log.Information($"Addition result: {result}");
