@@ -1,0 +1,64 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/History",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "history-service",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/History",
+      "UpstreamHttpMethod": [ "Get" ],
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 5000,
+        "TimeoutValue": 5000,
+        "RetryCount": 2,
+        "RetryInterval": 200
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/Addition",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "addition-service",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Addition",
+      "UpstreamHttpMethod": [ "Post" ],
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 5000,
+        "TimeoutValue": 5000,
+        "RetryCount": 2,
+        "RetryInterval": 200
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/Subtraction",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "subtraction-service",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Subtraction",
+      "UpstreamHttpMethod": [ "Post" ],
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 5000,
+        "TimeoutValue": 5000,
+        "RetryCount": 2,
+        "RetryInterval": 200
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:7000"
+  }
+}

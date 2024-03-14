@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HistoryService.API.Controllers;
 
-[ApiController] // Indicates this is an API controller
-[Route("api/[controller]")] // Base route will be like 'api/History'
+[ApiController]
+[Route("[controller]")]
 public class HistoryController : ControllerBase
 {
     private readonly IHistoryService _historyService;
@@ -16,7 +16,7 @@ public class HistoryController : ControllerBase
         _historyService = historyService;
     }
 
-    [HttpGet("history")] 
+    [HttpGet] 
     public async Task<ActionResult<IEnumerable<OperationEntry>>> GetHistory()
     {
         var historyEntries = await _historyService.GetHistory();
