@@ -68,11 +68,11 @@ namespace AdditionService
                     return number1 + number2;
                 }
 
-                activity.SetTag("input.number1", number1);
-                activity.SetTag("input.number2", number2);
+                // activity.SetTag("input.number1", number1);
+                // activity.SetTag("input.number2", number2);
 
                 int result = number1 + number2;
-                activity.SetTag("output.result", result);
+                // activity.SetTag("output.result", result);
                 
                 var policyWrap = Policy.Wrap(retryPolicy, circuitBreakerPolicy);
 
