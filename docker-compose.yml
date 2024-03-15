@@ -51,6 +51,36 @@ services:
         condition: service_healthy
     networks:
       - myapp-network
+  
+  addition-api:
+    build:
+      context: .
+      dockerfile: AdditionAPI/Dockerfile 
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80;http://+:443
+      - EASYNETQ_CONNECTION_STRING=host=rabbitmq;virtualHost=/;username=user;password=pass
+    ports:
+      - "7000:80" 
+    depends_on:
+      - rabbitmq
+    networks:
+      - myapp-network  
+  
+  subtraction-api:
+    build:
+      context: .
+      dockerfile: SubtractionAPI/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80;http://+:443
+      - EASYNETQ_CONNECTION_STRING=host=rabbitmq;virtualHost=/;username=user;password=pass
+    ports:
+      - "9000:80"
+    depends_on:
+      - rabbitmq
+    networks:
+      - myapp-network
 
 volumes:
   seq-server-data:

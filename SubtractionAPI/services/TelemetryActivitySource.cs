@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace AdditionAPI.services;
+namespace SubtractionAPI.services;
 
 public static class TelemetryActivitySource
 {

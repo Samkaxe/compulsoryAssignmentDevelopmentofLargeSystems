@@ -1,18 +1,23 @@
-﻿using System.Diagnostics;
-using System.Text;
-using System.Text.Json;
+﻿using System;
+using System.Diagnostics;
 using Polly;
 using Polly.CircuitBreaker;
 using Polly.Retry;
-using RabbitMQ.Client;
 using Serilog;
+// for rabbit mq 
+using RabbitMQ.Client;
+using System.Text;
+using EasyNetQ;
+using EasyNetQ.DI;
+using EasyNetQ.Serialization.SystemTextJson;
+using SharedConfiguration;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SubtractionAPI.services;
 
 public class Subtraction : ISubtraction
     {
-        private static readonly ActivitySource ActivitySource = new("SubtractionService.Subtraction");
-        //private static readonly OperationService OperationService = new OperationService(); we dont need this anymore 
+        private readonly IBus _bus;
         
         private static readonly RetryPolicy retryPolicy = Policy
             .Handle<Exception>()
@@ -33,29 +38,32 @@ public class Subtraction : ISubtraction
                     Log.Information("Circuit reset.");
                 });
 
-        private void PublishOperationMessage(int number1, int number2, int result)
+        public Subtraction()
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            using(var connection = factory.CreateConnection())
-            using(var channel = connection.CreateModel())
-            {
-                channel.ExchangeDeclare(exchange: "operations_exchange", type: "topic");
-
-                var routingKey = "subtraction.operation.logged";
-                var message = new { Number1 = number1, Number2 = number2, Result = result };
-                var messageBody = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(message));
-
-                channel.BasicPublish(exchange: "operations_exchange",
-                                     routingKey: routingKey,
-                                     basicProperties: null,
-                                     body: messageBody);
-                Console.WriteLine(" [x] Sent '{0}':'{1}'", routingKey, message);
-            }
+            _bus = RabbitHutch.CreateBus("host=rabbitmq;virtualHost=/;username=user;password=pass", serviceRegister =>
+                serviceRegister.Register<ISerializer>(_ => new SystemTextJsonSerializer()));
+        }
+        
+        private void PublishOperationMessageQ(int number1, int number2, int result)
+        {
+            var message = new OperationEntryMessage
+            { 
+                OperationType = "Subtraction",
+                Operand1 = number1,
+                Operand2 = number2,
+                Result = result,
+                TimeStamp = DateTime.UtcNow 
+            };
+    
+            _ = _bus.PubSub.PublishAsync(message); 
+            Log.Information("Hello Subtraction");
+            Log.Information($" [x] Sent message: {JsonSerializer.Serialize(message)}");
+            Console.WriteLine($" [x] Sent message: {JsonSerializer.Serialize(message)}");
         }
 
         public int Subtract(int number1, int number2)
         {
-            using (var activity = ActivitySource.StartActivity("Subtract"))
+            using (var activity = TelemetryActivitySource.Instance.StartActivity("Subtract"))
             {
                 if (activity == null)
                 {
@@ -74,7 +82,7 @@ public class Subtraction : ISubtraction
                 policyWrap.Execute(() => 
                 {
                     
-                    PublishOperationMessage(number1, number2, result);
+                    PublishOperationMessageQ(number1, number2, result);
                 });
 
                 return result;

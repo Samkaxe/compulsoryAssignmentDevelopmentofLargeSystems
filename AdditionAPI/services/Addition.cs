@@ -57,7 +57,7 @@ namespace AdditionAPI.services;
             };
     
             _ = _bus.PubSub.PublishAsync(message); 
-            Log.Information("Hello world");
+            Log.Information("Hello Addition");
             Log.Information($" [x] Sent message: {JsonSerializer.Serialize(message)}");
             Console.WriteLine($" [x] Sent message: {JsonSerializer.Serialize(message)}");
         }
