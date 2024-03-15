@@ -1,4 +1,4 @@
-﻿namespace AdditionService;
+﻿namespace AdditionAPI.services;
 
 public interface IAddition
 {

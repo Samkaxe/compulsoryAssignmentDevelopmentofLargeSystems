@@ -38,9 +38,11 @@ public static class ConfigurationService
                 }
             );
         
-        // Log.Logger = new LoggerConfiguration()
-        //     .WriteTo.Seq("http://localhost:5341")
-        //     .CreateLogger();
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.Seq("http://seq:5341") 
+            // setup
+            .CreateLogger();
 
     }
 }
