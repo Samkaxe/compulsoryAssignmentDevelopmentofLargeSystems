@@ -1,25 +1,21 @@
-﻿using System;
-using System.Diagnostics;
-using Polly;
-using Polly.CircuitBreaker;
-using Infrastructure;
-using Polly.Retry;
-using Serilog;
-// for rabbit mq 
-using RabbitMQ.Client;
+﻿using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
+using Polly;
+using Polly.CircuitBreaker;
+using Polly.Retry;
+using RabbitMQ.Client;
+using Serilog;
 
-namespace AdditionService
-{
-    public class Addition : IAddition
+namespace SubtractionAPI.services;
+
+public class Subtraction : ISubtraction
     {
-        private static readonly ActivitySource ActivitySource = new("AdditionService.Addition");
-        private static readonly OperationService OperationService = new OperationService();
-
-       
+        private static readonly ActivitySource ActivitySource = new("SubtractionService.Subtraction");
+        //private static readonly OperationService OperationService = new OperationService(); we dont need this anymore 
+        
         private static readonly RetryPolicy retryPolicy = Policy
-            .Handle<Exception>() // i added mock exception in the database service in the infrastructure 
+            .Handle<Exception>()
             .Retry(3, onRetry: (exception, retryCount) =>
             {
                 Log.Warning($"Attempt {retryCount}: Retrying due to {exception.Message}");
@@ -36,59 +32,52 @@ namespace AdditionService
                 {
                     Log.Information("Circuit reset.");
                 });
-        
+
         private void PublishOperationMessage(int number1, int number2, int result)
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
-            using (var connection = factory.CreateConnection())
-            using (var channel = connection.CreateModel())
+            using(var connection = factory.CreateConnection())
+            using(var channel = connection.CreateModel())
             {
                 channel.ExchangeDeclare(exchange: "operations_exchange", type: "topic");
 
-                var routingKey = "addition.operation.logged";
+                var routingKey = "subtraction.operation.logged";
                 var message = new { Number1 = number1, Number2 = number2, Result = result };
                 var messageBody = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(message));
 
                 channel.BasicPublish(exchange: "operations_exchange",
-                    routingKey: routingKey,
-                    basicProperties: null,
-                    body: messageBody);
+                                     routingKey: routingKey,
+                                     basicProperties: null,
+                                     body: messageBody);
                 Console.WriteLine(" [x] Sent '{0}':'{1}'", routingKey, message);
             }
         }
 
-        public int Add(int number1, int number2)
+        public int Subtract(int number1, int number2)
         {
-            
-            using (var activity = ActivitySource.StartActivity("Add"))
+            using (var activity = ActivitySource.StartActivity("Subtract"))
             {
                 if (activity == null)
                 {
-                    Log.Warning("Activity was not created.");
-                    return number1 + number2;
+                    Console.WriteLine("Activity was not created. Tracing might be misconfigured.");
+                    return number1 - number2;
                 }
 
-                // activity.SetTag("input.number1", number1);
-                // activity.SetTag("input.number2", number2);
+                activity.SetTag("input.number1", number1);
+                activity.SetTag("input.number2", number2);
 
-                int result = number1 + number2;
-                // activity.SetTag("output.result", result);
-                
+                int result = number1 - number2;
+                activity.SetTag("output.result", result);
+
                 var policyWrap = Policy.Wrap(retryPolicy, circuitBreakerPolicy);
 
                 policyWrap.Execute(() => 
                 {
-                    // 
-                    // the new way of sending data via rabbitmq 
-                      PublishOperationMessage(number1, number2, result);
                     
-                  // this for database call direct to test poly
-                  //   OperationService.LogOperation("Addition", number1, number2, result);
+                    PublishOperationMessage(number1, number2, result);
                 });
 
-                Log.Information($"Addition result: {result}");
                 return result;
             }
         }
     }
-}
