@@ -26,8 +26,5 @@
       <PackageReference Include="Zipkin" Version="1.0.15" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
-    </ItemGroup>
 
 </Project>
