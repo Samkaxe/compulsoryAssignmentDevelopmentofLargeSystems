@@ -51,6 +51,22 @@ services:
         condition: service_healthy
     networks:
       - myapp-network
+        
+  addition-service:
+    build:
+      context: .
+      dockerfile: AdditionMicroservice/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80;http://+:443
+      - EASYNETQ_CONNECTION_STRING=host=rabbitmq;virtualHost=/;username=user;password=pass
+    ports:
+      - "7000:80"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - myapp-network
 
 volumes:
   seq-server-data:

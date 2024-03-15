@@ -27,10 +27,11 @@ public class HistoryConsumer: BackgroundService
 
         await _bus.PubSub.SubscribeAsync<OperationEntryMessage>("Operation_Entries", HandleOperationEntry, stoppingToken);
     }
-    
+        
     
     private async Task HandleOperationEntry(OperationEntryMessage dto)
     {
+        
         using var activity = ActivitySource.StartActivity("HandleOperationEntry", ActivityKind.Server);
         
         if (activity == null)

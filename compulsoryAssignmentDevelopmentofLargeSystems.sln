@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoryService", "HistorySe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedConfiguration", "SharedConfiguration\SharedConfiguration.csproj", "{6DBEBC60-C1D4-4553-AA73-1DA4C4E89FDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdditionMicroservice", "AdditionMicroservice\AdditionMicroservice.csproj", "{F9DCB3B0-8B5B-4A85-9BA7-B9ACD30B7209}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,9 @@ Global
 		{6DBEBC60-C1D4-4553-AA73-1DA4C4E89FDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DBEBC60-C1D4-4553-AA73-1DA4C4E89FDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DBEBC60-C1D4-4553-AA73-1DA4C4E89FDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9DCB3B0-8B5B-4A85-9BA7-B9ACD30B7209}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9DCB3B0-8B5B-4A85-9BA7-B9ACD30B7209}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9DCB3B0-8B5B-4A85-9BA7-B9ACD30B7209}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9DCB3B0-8B5B-4A85-9BA7-B9ACD30B7209}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
