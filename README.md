@@ -21,6 +21,40 @@ Our application is built on a microservices architecture that emphasizes high av
 
 Serving as the unified entry point for all client requests, the API Gateway simplifies communication and provides robustness through a retry policy that manages transient failures.
 
+
+
+Below is an example configuration for setting up a route in an API Gateway. This configuration allows the gateway to manage requests between the client and the History service, and importantly implements a retry policy.
+
+```json
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/History",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "history-service",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/History",
+      "UpstreamHttpMethod": [ "Get" ],
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 5000,
+        "TimeoutValue": 5000,
+        "RetryCount": 2,
+        "RetryInterval": 200
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:9999"
+  }
+}
+```
+
+
 ### Microservices: Addition & Subtraction Services
 
 These stateless microservices handle arithmetic operations swiftly, returning results to the client and sending operation details to a message queue, following a non-blocking "fire-and-forget" messaging pattern.
