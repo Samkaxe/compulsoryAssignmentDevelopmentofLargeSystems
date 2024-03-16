@@ -5,13 +5,14 @@
 
 Our application is built on a microservices architecture that emphasizes high availability, fault tolerance, and scalability. By designing our system to manage high volumes of requests with resilience, we ensure continued operation even in the event of component failures.
 
-## System Diagram
+## System Architecture Diagram
 
-![img.png](img.png)![System Diagram](https://cdn.discordapp.com/attachments/1216467817151598622/1216780161559560212/image.png)
+![System Architecture Diagram](https://cdn.discordapp.com/attachments/1216467817151598622/1216780161559560212/image.png?ex=6601a1d5&is=65ef2cd5&hm=486c3ee77d17027227607cf105afff294a0236c64784b23b5f0f8b7a7a93a8c8&)
 
-## Swimlanes
 
-https://static.swimlanes.io/cd572eb0d6bb56ed97fbefc6105afb4f.png
+## Swimlane Diagram
+
+![Swimlane Diagram](https://static.swimlanes.io/cd572eb0d6bb56ed97fbefc6105afb4f.png)
 
 
 ## Architecture Design
