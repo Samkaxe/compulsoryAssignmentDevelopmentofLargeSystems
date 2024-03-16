@@ -30,7 +30,7 @@ export default function Home() {
     const handleSubtract = async () => {
         try {
             setLoading(true);
-            const response = await fetch(`https://localhost:7205/Subtraction?number1=${number1}&number2=${number2}`, {
+            const response = await fetch(`https://localhost:9000/Subtraction?number1=${number1}&number2=${number2}`, {
                 method: "GET",
             });
             const data = await response.json();
@@ -44,7 +44,7 @@ export default function Home() {
     const handleAdd = async () => {
         try {
             setLoading(true);
-            const response = await fetch(`https://localhost:7041/Addition?number1=${number1}&number2=${number2}`, {
+            const response = await fetch(`https://localhost:7000/Addition?number1=${number1}&number2=${number2}`, {
                 method: "GET",
             });
             const data = await response.json();
@@ -58,7 +58,7 @@ export default function Home() {
     const getHistory = async () => {
         try {
             setHistoryLoading(true);
-            const response = await fetch(`https://localhost:7014/api/History/history`, {
+            const response = await fetch(`http://localhost:6969/History`, {
                 method: "GET",
             });
             const data = await response.json();
