@@ -7,11 +7,11 @@ Our application is built on a microservices architecture that emphasizes high av
 
 ## System Diagram
 
-![System Diagram](https://cdn.discordapp.com/attachments/1216467817151598622/1216780161559560212/image.png)
+![img.png](img.png)![System Diagram](https://cdn.discordapp.com/attachments/1216467817151598622/1216780161559560212/image.png)
 
 ## Swimlanes
 
-![Swimlanes](https://github.com/Samkaxe/compulsoryAssignmentDevelopmentofLargeSystems/raw/main/assets/90699819/1af6f873-9668-4016-9489-3393c4ff60e5)
+https://static.swimlanes.io/cd572eb0d6bb56ed97fbefc6105afb4f.png
 
 
 ## Architecture Design
