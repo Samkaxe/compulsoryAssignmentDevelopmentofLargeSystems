@@ -284,7 +284,121 @@ Each service is configured with its specific requirements and dependencies:
 * Networks are defined to ensure communication between services within the Docker network.
 
 
-
 ## UI
 
-Adam this is your part 
+### Choosing the suitable tool for the calculator web-app
+To accomplish a simple UI followed by simple logic we could choose from many different technologies. 
+But eventually, we have decided to use Nextjs, cause it's an easy setup that supports Typescript, which helps with type safety,
+and Tailwind that's used for styling
+
+### How does the calculator work
+The UI consists of two input fields, after filling in the values we can call different endpoints(services) by pressing the corresponding button(- or +).
+By clicking the Get History button, the history endpoint is called, and all calculator history is returned
+
+![UI](image.png)
+
+## Kubernetes
+
+Thought we didn't make kuberentes work in our calculator project, we have reserached how it could be implemented.
+Let's say we have kubernetes engine enable in google cloud, kubernetes cluster configured, and our pipeline is able to build a docker image and push it to the artifact registry,
+then we can create yaml config files that are applied during pipeline being executed.
+for example for web-front we could have service, Ingress, and deployment file
+
+### Service
+* forwarding incoming requests on port 80 to the target port 3000 where the application is listening
+* namespace is set to production, e.g. so we can have diffrent environments 
+* name of the service is set for web-front
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: web-front
+  name: web-front
+  namespace: prod
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: web-front
+
+```
+
+### Ingress
+* The Ingress configuration exposes the web-front service to the outside world through a specified URL (calculator.com).
+* It forwards external traffic to the internal service.
+* Using NGINX as ingress controller
+
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: calculator.com
+  namespace: prod
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/proxy-body-size: 1g
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: calculator.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-front
+            port:
+              number: 80
+  tls:
+  - secretName: calculator.com
+    hosts:
+    - calculator.com
+
+```
+
+### Deployment
+* Takes care of desired number of web-front pods running 
+* uses the latest image from artifact registry
+* specifing the app resources limits
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    reloader.stakater.com/auto: "true"
+  labels:
+    app: web-front
+  name: web-front
+  namespace: prod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-front
+  template:
+    metadata:
+      labels:
+        app: web-front
+    spec:
+      imagePullSecrets:
+      - name: pull-secret
+      containers:
+      - image: #the lastes image from e.g. artifact registry
+        imagePullPolicy: Always
+        name: web-front
+        resources:
+          limits:
+            ephemeral-storage: 32Gi
+            memory: 4Gi
+          requests:
+            cpu: 500m
+            ephemeral-storage: 32Gi
+            memory: 4Gi
+
+```
