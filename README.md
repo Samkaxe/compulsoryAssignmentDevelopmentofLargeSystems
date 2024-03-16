@@ -1,8 +1,42 @@
 ﻿# compulsoryAssignmentDevelopmentofLargeSystems
+# Application Architecture Overview
 
-## Schema Architecture
+## Introduction
 
-renars pls do this part because you have the image of schema 
+Our application is built on a microservices architecture that emphasizes high availability, fault tolerance, and scalability. By designing our system to manage high volumes of requests with resilience, we ensure continued operation even in the event of component failures.
+
+## System Diagram
+
+![System Diagram](https://cdn.discordapp.com/attachments/1216467817151598622/1216780161559560212/image.png)
+
+## Swimlanes
+
+![Swimlanes](https://github.com/Samkaxe/compulsoryAssignmentDevelopmentofLargeSystems/raw/main/assets/90699819/1af6f873-9668-4016-9489-3393c4ff60e5)
+
+
+## Architecture Design
+
+### API Gateway
+
+Serving as the unified entry point for all client requests, the API Gateway simplifies communication and provides robustness through a retry policy that manages transient failures.
+
+### Microservices: Addition & Subtraction Services
+
+These stateless microservices handle arithmetic operations swiftly, returning results to the client and sending operation details to a message queue, following a non-blocking "fire-and-forget" messaging pattern.
+
+### "Fire-and-Forget" Messaging Pattern
+
+We implement a "fire-and-forget" pattern for messages sent to the History service, which provides fault isolation and system resilience. When the Addition and Subtraction services publish messages to the queue, they do not await an acknowledgment. This decouples the services, ensuring that the core operational services are not impacted by the History service's performance or availability. The operation services continue to efficiently process incoming requests without delay.
+
+### Message Queue: RabbitMQ
+
+RabbitMQ serves as our message broker, facilitating asynchronous communication between microservices and ensuring reliable message delivery without impeding the performance of the operation services.
+
+### History Service
+
+The History service is tasked with persisting operation data. It operates both asynchronously, listening to the message queue, and synchronously, via direct API Gateway requests, allowing for flexible data retrieval.
+
+## Deployment
 
 
 ## Fault Isolation
