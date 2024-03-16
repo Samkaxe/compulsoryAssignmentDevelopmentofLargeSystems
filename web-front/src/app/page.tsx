@@ -1,11 +1,22 @@
 "use client";
 import { useState } from "react";
 
+interface History {
+    id: number;
+    operationType: string;
+    operand1: number;
+    operand2: number;
+    result: number;
+    timeStamp: string;
+}
+
 export default function Home() {
     const [number1, setNumber1] = useState<number>();
     const [number2, setNumber2] = useState<number>();
     const [result, setResult] = useState<number>();
     const [loading, setLoading] = useState<boolean>(false);
+    const [history, setHistory] = useState<History[]>([]);
+    const [historyLoading, setHistoryLoading] = useState<boolean>(false);
 
     const handleNumber1 = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -42,6 +53,20 @@ export default function Home() {
             console.error(e);
         }
         setLoading(false);
+    };
+
+    const getHistory = async () => {
+        try {
+            setHistoryLoading(true);
+            const response = await fetch(`https://localhost:7014/api/History/history`, {
+                method: "GET",
+            });
+            const data = await response.json();
+            setHistory(data);
+        } catch (e) {
+            console.error(e);
+        }
+        setHistoryLoading(false);
     };
 
     return (
@@ -101,6 +126,24 @@ export default function Home() {
                     </div>
                     <h2>Result</h2>
                     <span>{loading ? "Loading..." : result}</span>
+                    <button
+                        onClick={getHistory}
+                        type="button"
+                        className="rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                        Get History
+                    </button>
+                    {historyLoading
+                        ? "Loading..."
+                        : history.map((item) => (
+                              <div key={item.id}>
+                                  <span>{item.operationType}</span>
+                                  <span>{item.operand1}</span>
+                                  <span>{item.operand2}</span>
+                                  <span>{item.result}</span>
+                                  <span>{item.timeStamp}</span>
+                              </div>
+                          ))}
                 </div>
             </div>
         </main>
