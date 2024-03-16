@@ -24,12 +24,12 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "addition-service",
+          "Host": "addition-api",
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/gateway/Addition",
-      "UpstreamHttpMethod": [ "Post" ],
+      "UpstreamPathTemplate": "/gateway/Addition/",
+      "UpstreamHttpMethod": [ "Get" ],
       "QoSOptions": {
         "ExceptionsAllowedBeforeBreaking": 3,
         "DurationOfBreak": 5000,
@@ -43,12 +43,12 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "subtraction-service",
+          "Host": "subtraction-api",
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/gateway/Subtraction",
-      "UpstreamHttpMethod": [ "Post" ],
+      "UpstreamPathTemplate": "/gateway/Subtraction/",
+      "UpstreamHttpMethod": [ "Get" ],
       "QoSOptions": {
         "ExceptionsAllowedBeforeBreaking": 3,
         "DurationOfBreak": 5000,
@@ -59,6 +59,6 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:7000"
+    "BaseUrl": "http://localhost:9999"
   }
 }
