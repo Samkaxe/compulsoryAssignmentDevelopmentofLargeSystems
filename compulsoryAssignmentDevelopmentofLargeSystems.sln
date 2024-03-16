@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdditionAPI", "AdditionAPI\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtractionAPI", "SubtractionAPI\SubtractionAPI.csproj", "{B365FC9C-CA75-402D-AB9F-A4BAAB4CFDF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API-Gateway", "API-Gateway\API-Gateway.csproj", "{4BD27480-649B-445A-81E7-4C35432E009F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +24,10 @@ Global
 		{6DBEBC60-C1D4-4553-AA73-1DA4C4E89FDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DBEBC60-C1D4-4553-AA73-1DA4C4E89FDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DBEBC60-C1D4-4553-AA73-1DA4C4E89FDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BD27480-649B-445A-81E7-4C35432E009F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BD27480-649B-445A-81E7-4C35432E009F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BD27480-649B-445A-81E7-4C35432E009F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BD27480-649B-445A-81E7-4C35432E009F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E4DF07BE-1440-4985-B01F-130863DDD3E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E4DF07BE-1440-4985-B01F-130863DDD3E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4DF07BE-1440-4985-B01F-130863DDD3E2}.Release|Any CPU.ActiveCfg = Release|Any CPU

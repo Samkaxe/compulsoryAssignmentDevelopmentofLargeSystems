@@ -35,6 +35,19 @@ services:
       - "9411:9411"
     networks:
       - myapp-network
+        
+  api-gateway:
+    build:
+      context: .
+      dockerfile: API-Gateway/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "9999:80"
+      - "10000:443"
+    networks:
+      - myapp-network
     
   history-service:
     build:
