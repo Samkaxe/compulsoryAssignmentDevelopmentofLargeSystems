@@ -21,7 +21,7 @@ namespace AdditionAPI.services;
        
         
         private static readonly RetryPolicy retryPolicy = Policy
-            .Handle<Exception>() // i added mock exception in the database service in the infrastructure 
+            .Handle<Exception>() 
             .Retry(3, onRetry: (exception, retryCount) =>
             {
                 Log.Warning($"Attempt {retryCount}: Retrying due to {exception.Message}");
