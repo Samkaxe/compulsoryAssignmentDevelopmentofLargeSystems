@@ -215,7 +215,15 @@ Each service is configured with its specific requirements and dependencies:
 * Networks are defined to ensure communication between services within the Docker network.
 
 
-
 ## UI
 
-Adam this is your part 
+### Choosing the suitable tool for the calculator web-app
+To accomplish a simple UI followed by simple logic we could choose from many different technologies. 
+But eventually, we have decided to use Nextjs, cause it's an easy setup that supports Typescript, which helps with type safety,
+and Tailwind that's used for styling
+
+### How does the calculator work
+The UI consists of two input fields, after filling in the values we can call different endpoints(services) by pressing the corresponding button(- or +).
+By clicking the Get History button, the history endpoint is called, and all calculator history is returned
+
+![UI](image.png)
